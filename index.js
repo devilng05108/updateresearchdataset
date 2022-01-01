@@ -72,19 +72,15 @@ Promise.all(
     (repo) =>
       new Promise(async (resolve, reject) => {
         console.log("repo id is"+repo.repo_id);
-        let site = `https://api.github.com/repositories/${repo.repo_id}`,
-          response = await fetch(site, {
-            method: 'GET',
-            headers: {
-              Authorization: `token `,
-            },
-          }),
-          data = await response.json();
-          // console.log(data);
-            // let apiUrl =
-            //   'https://api.github.com/repositories/' +
-            //   repoID +
-            //   '/contributors?per_page=1&anon=true';
+        // let site = `https://api.github.com/repositories/${repo.repo_id}`,
+        //   response = await fetch(site, {
+        //     method: 'GET',
+        //     headers: {
+        //       Authorization: `token `,
+        //     },
+        //   }),
+        //   data = await response.json();
+
         let site2 = `https://api.github.com/repositories/${repo.repo_id}/contributors?per_page=1`,
           response2 = await fetch(site2, {
             method: 'GET',
@@ -101,23 +97,22 @@ Promise.all(
           link == null
             ? data2.message
             : link.split(';')[1].split('&page=')[1].split('>')[0];
-        repo.primary_language = data.language;
-        repo.description = data.description;
-        repo.size = data.size;
-        repo.stars = data.stargazers_count;
+        // repo.primary_language = data.language;
+        // repo.description = data.description;
+        // repo.size = data.size;
+        // repo.stars = data.stargazers_count;
         repo.contributors_without_anonymous = contributors;
-        repo.created_at = data.created_at;
-        repo.pushed_at = data.pushed_at;
-        repo.full_name = data.full_name;
-        repo.html_url = data.html_url;
-        repo.api_url = data.url;
+        // repo.created_at = data.created_at;
+        // repo.pushed_at = data.pushed_at;
+        // repo.full_name = data.full_name;
+        // repo.html_url = data.html_url;
+        // repo.api_url = data.url;
         // console.log("Got description = ", location.description)
         resolve();
       })
   )
 ).then(() => {
   console.log(repos.length);
-  console.log('locations[1].description = ', repos[0].size);
   var newWB = xlsx.utils.book_new();
   var newWS = xlsx.utils.json_to_sheet(repos);
   xlsx.utils.book_append_sheet(newWB, newWS, 'New data');
