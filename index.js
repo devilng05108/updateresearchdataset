@@ -76,7 +76,7 @@ Promise.all(
           response = await fetch(site, {
             method: 'GET',
             headers: {
-              Authorization: `token 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 `,
+              Authorization: `token `,
             },
           }),
           data = await response.json();
@@ -89,7 +89,7 @@ Promise.all(
           response2 = await fetch(site2, {
             method: 'GET',
             headers: {
-              Authorization: `token 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 `,
+              Authorization: `token `,
             },
           });
           let link = response2.headers.get('link');
