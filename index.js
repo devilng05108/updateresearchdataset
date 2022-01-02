@@ -45,36 +45,36 @@ Promise.all(
   repos.map(
     (repo) =>
       new Promise(async (resolve, reject) => {
-        console.log("repo id is"+repo.repo_id);
-        if(repo.size){
+        console.log('repo id is' + repo.repo_id);
+        if (repo.size) {
           console.log('got size');
           resolve();
-        }else{
+        } else {
           let site = `https://api.github.com/repositories/${repo.repo_id}`,
             response = await fetch(site, {
               method: 'GET',
               headers: {
-                Authorization: `token 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`,
+                Authorization: `token AddPersonalAccessTokenHere`,
               },
             }),
             data = await response.json();
-            console.log(data);
-                    repo.created_at = data.created_at;
-                    repo.pushed_at = data.pushed_at;
-                    repo.full_name = data.full_name;
-                    repo.html_url = data.html_url;
-                    repo.api_url = data.url;
-        repo.primary_language = data.language;
-        repo.description = data.description;
-        repo.size = data.size;
-        repo.stars = data.stargazers_count;
-        resolve();
+          console.log(data);
+          repo.created_at = data.created_at;
+          repo.pushed_at = data.pushed_at;
+          repo.full_name = data.full_name;
+          repo.html_url = data.html_url;
+          repo.api_url = data.url;
+          repo.primary_language = data.language;
+          repo.description = data.description;
+          repo.size = data.size;
+          repo.stars = data.stargazers_count;
+          resolve();
         }
         // let site = `https://api.github.com/repositories/${repo.repo_id}`,
         //   response = await fetch(site, {
         //     method: 'GET',
         //     headers: {
-        //       Authorization: `token `,
+        //       Authorization: `token AddPersonalAccessTokenHere`,
         //     },
         //   }),
         //   data = await response.json();
@@ -83,7 +83,7 @@ Promise.all(
         //   response2 = await fetch(site2, {
         //     method: 'GET',
         //     headers: {
-        //       Authorization: `token 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 `,
+        //       Authorization: `token AddPersonalAccessTokenHere `,
         //     },
         //   });
         //   let link = response2.headers.get('link');
@@ -94,7 +94,6 @@ Promise.all(
         //   link == null
         //     ? data2.message
         //     : link.split(';')[1].split('&page=')[1].split('>')[0];
-
 
         // repo.primary_language = data.language;
         // repo.description = data.description;
